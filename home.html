@@ -2,30 +2,184 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather App</title>
     <link rel="stylesheet" type="text/css" href="Stylesheet.css">
 </head>
-
 <body>
-<!--Header-->
     <header>
-<!--Navigation bar top-left-->
         <div class="top-bar-left">
             <img src="https://cdn-icons-png.flaticon.com/512/1779/1779940.png" alt="">
             <h1>Cuacane</h1>
         </div>
-
-<!--Navigation bar top-right-->
         <div class="top-bar-right">
             <nav>
                 <ul>
-                    <li id="home-menu"><a href="">Home</a>
-                    <li id="weather-menu"><a href="">Weather</a>
-                    <li id="about-us-menu"><a href="">About Us</a>
+                    <li id="home-menu"><a href="">Home</a></li>
+                    <li id="weather-menu"><a href="">Weather</a></li>
+                    <li id="about-us-menu"><a href="">About Us</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <div class="container">
+        <div class="container-top">
+            <p>Plan your day with accuracy</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search Area">
+                <button type="button" class="search-btn">🔎</button>
+            </div>
+        </div>
+
+        <div class="bottom-container">
+            <div class="container-left">
+                <div class="main-container-left">
+                    <div class="weather-box">
+                        <p id="location-weather-box">Loading...</p>
+                        <p id="temperature">Loading...</p>
+                        <img src="" alt="Weather-now" id="weather-icon">
+                    </div>
+                </div>
+                <div class="index-container-left">
+                    <div class="uv-index">
+                        <div class="uv-index-category">
+                            <img src="https://cdn-icons-png.flaticon.com/128/979/979585.png" alt="">
+                            <p>UV Index</p>
+                        </div>
+                        <p id="uv-index-content">Loading...</p>
+                    </div>
+                    <div class="wind">
+                        <div class="wind-category">
+                            <img src="wind.png" alt="">
+                            <p>Wind</p>
+                        </div>
+                        <p id="wind-content">Loading...</p>
+                    </div>
+                    <div class="humidity">
+                        <div class="humidity-category">
+                            <img src="humidity.png" alt="">
+                            <p>Humidity</p>
+                        </div>
+                        <p id="humidity-content">Loading...</p>
+                    </div>
+                </div>
+            </div>
+            <aside class="forecast">
+                <h2>3 Day Forecast</h2>
+                <div id="forecast-container"></div>
+            </aside>
+        </div>
+    </div>
+
+    <footer>
+        <div class="Footer">
+            <p>©️ Copyright 2023 by Team 12 - Nusantara  for RevoU Kampus Merdeka Program</p>
+        </div>
+    </footer>    
+
+    <script>
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+        const locationWeatherBox = document.getElementById('location-weather-box');
+        const temperature = document.getElementById('temperature');
+        const weatherIcon = document.getElementById('weather-icon');
+        const uvIndexContent = document.getElementById('uv-index-content');
+        const windContent = document.getElementById('wind-content');
+        const humidityContent = document.getElementById('humidity-content');
+        const forecastContainer = document.getElementById('forecast-container');
+    
+        searchBtn.addEventListener('click', () => {
+            const searchValue = searchInput.value;
+            getWeatherData(searchValue);
+        });
+    
+        // Mendapatkan data cuaca berdasarkan lokasi
+        function getWeatherData(location) {
+            const apiKey = 'a6497913cf13aa1c8c56af116b4ef52f';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
+    
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Mengupdate data cuaca saat ini
+                    locationWeatherBox.textContent = data.name + ', ' + data.sys.country;
+                    temperature.textContent = data.main.temp + '°C';
+                    weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+    
+                    // Mengupdate UV Index, kecepatan angin, dan kelembapan
+                    uvIndexContent.textContent = data?.uvi || 'N/A';
+                    windContent.textContent = data?.wind?.speed + ' km/h' || 'N/A';
+                    humidityContent.textContent = data?.main?.humidity + '%' || 'N/A';
+                })
+                .catch(error => {
+                    console.log('Terjadi kesalahan:', error);
+                });
+        }
+    
+        // Mendapatkan data ramalan cuaca 3 hari ke depan
+        function getForecastData(location) {
+            const apiKey = 'a6497913cf13aa1c8c56af116b4ef52f';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`;
+    
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Mengupdate data ramalan cuaca 3 hari
+                    forecastContainer.innerHTML = '';
+    
+                    for (let i = 0; i < 3; i++) {
+                        const forecastDay = document.createElement('div');
+                        forecastDay.classList.add('forecast-day');
+                        const day = document.createElement('div');
+                        day.classList.add('day');
+                        const weatherIcon = document.createElement('div');
+                        weatherIcon.classList.add('weather-icon');
+                        const temperature = document.createElement('div');
+                        temperature.classList.add('temperature');
+    
+                        const forecastData = data.list[i * 8];
+    
+                        const date = new Date(forecastData.dt * 1000);
+                        day.textContent = date.toLocaleDateString('en-US', { weekday: 'long' });
+                        weatherIcon.innerHTML = `<img src="http://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png" alt="Cuaca ${i + 1}">`;
+                        temperature.textContent = forecastData.main.temp + '°C';
+    
+                        forecastDay.appendChild(day);
+                        forecastDay.appendChild(weatherIcon);
+                        forecastDay.appendChild(temperature);
+                        forecastContainer.appendChild(forecastDay);
+                    }
+                })
+                .catch(error => {
+                    console.log('Terjadi kesalahan:', error);
+                });
+        }
+    
+        // Mendapatkan data cuaca untuk lokasi Jakarta, Indonesia secara default
+        function getDefaultWeatherData() {
+            const defaultLocation = 'Jakarta, Indonesia';
+            getWeatherData(defaultLocation);
+            getForecastData(defaultLocation);
+        }
+    
+        // Mengambil data cuaca saat search box ditekan
+        const searchBox = document.querySelector('.search-input');
+        const searchButton = document.querySelector('.search-btn');
+    
+        searchButton.addEventListener('click', () => {
+            const location = searchBox.value.trim();
+            if (location !== '') {
+                getWeatherData(location);
+                getForecastData(location);
+            }
+        });
+    
+        // Memanggil fungsi getDefaultWeatherData saat halaman dimuat
+        window.addEventListener('load', () => {
+            getDefaultWeatherData();
+        });
+    </script>
+    
+</body>
+</html>
