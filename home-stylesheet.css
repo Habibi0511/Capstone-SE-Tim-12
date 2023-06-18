@@ -20,13 +20,13 @@ header {
 }
 
 .top-bar-left img {
-    width: 40px;
-    height: 40px;
+    width: 75px;
+    height: 60px;
     padding-left: 10px;
 }
 
 .top-bar-left h1 {
-    padding-left: 15px;
+    padding-left: 5px;
     margin: 0;
 }
 
@@ -87,8 +87,8 @@ a {
 
 .search-box input[type="text"] {
     margin: 0px;
-    padding: 15px 150px;
     font-size: 17px;
+    padding: 15px 150px;
     background-color: #ffffff;
     color: #2C4C61;
     border: none;
@@ -102,6 +102,12 @@ a {
     background-color: #ffffff;
     border-radius: 100px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#search-button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
 }
 
 /*bottom container*/
@@ -131,35 +137,19 @@ a {
     color:#2C4C61;
 }
 
+#last-update {
+  margin: 0;
+  padding-top: 10px;
+  font-size: x-small;
+  color: grey;
+}
+
 #location-weather-box {
     color: #2C4C61;
     font-weight: 600;
     font-size: 30px;
     margin: 0;
 }
-
-.search-dropdown {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1;
-}
-
-.search-dropdown li {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.search-dropdown li:hover {
-  background-color: #f1f1f1;
-}
-
 
 #temperature {
     font-weight: 200;
@@ -168,13 +158,63 @@ a {
     margin: 0;
 }
 
+#weather-description {
+    margin: 0;
+    font-size: x-large;
+    font-weight: 500;
+}
+
 .weather-box img {
     width: 100px;
     height: 100px;
     position: absolute;
-    top: 30px;
+    top: 10px;
     right: 30px;
     padding-right: 10px;
+}
+
+/*styling list search input*/
+.search-box {
+  position: relative;
+}
+
+.search-input {
+  padding-right: 40px;
+}
+
+.search-btn {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  margin-left: 10px;
+  background-color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+datalist {
+  position: absolute;
+  z-index: 1;
+  background-color: #fff;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+datalist option {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+datalist option:hover {
+  background-color: #f5f5f5;
 }
 
 /*other index weather styling*/
@@ -186,8 +226,8 @@ a {
     width: 510px;
 }
 
-/*uv index styling*/
-.uv-index {
+/*temperature styling*/
+.temperature-left {
     position: relative;
     background-color: #ffffff;
     border-radius: 15px;
@@ -195,7 +235,7 @@ a {
     padding: 10px 10px;
 }
 
-.uv-index-category {
+.temperature-category {
     display: flex;
     padding: 5px 5px;
     position: relative;
@@ -203,13 +243,13 @@ a {
     justify-content: center;
 }
 
-.uv-index img {
+.temperature-left img {
     float: left;
     width: 30px;
     height: 30px;
 }
 
-.uv-index p{
+.temperature-left p{
     overflow: hidden;
     margin-top: 0;
     margin-bottom: 0;
@@ -218,14 +258,15 @@ a {
     padding: 5px 0 0 7px;
 }
 
-#uv-index-content{
-    display: flex;
-    justify-content: center;
-    font-size:xx-large;
-    margin-bottom: 0;
-    padding-bottom: 5px;
-    font-weight: 600;
+#temperature {
+  display: flex;
+  justify-content: center;
+  font-size: x-large;
+  margin-bottom: 0;
+  padding: 10px 0px;
+  font-weight: 500;
 }
+
 
 /*wind index styling*/
 .wind {
@@ -262,10 +303,10 @@ a {
 #wind-content{
     display: flex;
     justify-content: center;
-    font-size: 20px;
+    font-size: x-large;
     margin-bottom: 0;
     padding: 10px 0px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /*humidity styling*/
@@ -301,12 +342,12 @@ a {
 }
 
 #humidity-content{
-    display: flex;
-    justify-content: center;
-    font-size:xx-large;
-    margin-bottom: 0;
-    padding-bottom: 5px;
-    font-weight: 600;
+  display: flex;
+  justify-content: center;
+  font-size: x-large;
+  margin-bottom: 0;
+  padding: 10px 0px;
+  font-weight: 500;
 }
 
 /*aside weather styling*/
@@ -327,7 +368,7 @@ a {
   
 .forecast h2 {
     text-align: left;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     margin-top: 0;
     font-size: 25px;
     padding-left: 10px;
@@ -342,8 +383,9 @@ a {
 .day {
     flex: 1;
     text-align: left;
-    padding-left: 30px;
+    padding-left: 10px;
     font-weight: 550;
+    width: 102px;
 }
   
 .weather-icon {
@@ -362,6 +404,11 @@ a {
     font-weight: 550;
     text-align: center;
 }
+
+.weather-description {
+  flex: 1;
+  font-size: smaller;
+}
     
 /*Footer styling*/
 .Footer {
@@ -377,4 +424,148 @@ a {
     color: white;
     font-size: 12px;
     padding-top: 5px;
+    margin-left: 10px;
+}
+
+
+/*Mobile media */
+@media (max-width:670px) {
+    /* CSS untuk tampilan mobile */
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2C4C61;
+    font: inherit;
+    color: #ffffff;
+  }
+  
+  .top-bar-left img {
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .top-bar-left h1 {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .top-bar-right nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .top-bar-right nav ul li {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  .top-bar-right nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  /* Container */
+  .container {
+    padding: 10px;
+  }
+  
+  .container-top {
+    text-align: center;
+    font-size:x-large;
+  }
+  
+  .search-box {
+    margin-top: 10px;
+  }
+  
+  .search-input {
+    width: 20%;
+    font-size: 14px;
+    padding: 7px 40px;
+  }
+  
+  .search-btn {
+    width: 15%;
+    padding: 5px;
+    font-size: 14px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+  }
+  
+  .bottom-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container-left {
+    margin-bottom: 10px;
+  }
+  
+  .main-container-left {
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+  
+  .weather-box {
+    text-align: center;
+  }
+  
+  #location-weather-box {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  #index-container-left {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .uv-index,
+  .wind,
+  .humidity {
+    flex-basis: 30%;
+  }
+  
+  .uv-index-category,
+  .wind-category,
+  .humidity-category {
+    display: flex;
+    align-items: center;
+  }
+  
+  .uv-index-category img,
+  .wind-category img,
+  .humidity-category img {
+    height: 20px;
+    margin-right: 5px;
+  }
+  
+  #forecast-container {
+    margin-top: 10px;
+  }
+  
+  .forecast {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .forecast h2 {
+    margin-top: 0;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+  }  
 }
