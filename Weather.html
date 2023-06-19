@@ -1,82 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cuacane</title>
-    <link rel="stylesheet" href="Weather.css">
-</head>
-<body>
+    <link rel="stylesheet" href="Weather.css" />
+  </head>
+  <body>
     <header>
-        <section class="bar">
-            <img src="cuacane.png" alt="" srcset="">
-            <h1>Cuacane</h1>
-        </section>
-        <ul>
-            <li><a href="home.html"><img src="home.png" alt="" width="20px"></li>
-            <li>Weather</li>
-            <li><a href="Our Team.html">About Us</a></li>
-        </ul>
+      <section class="bar">
+        <img src="image/cuacane.png" alt="" srcset="" />
+        <h1>Cuacane</h1>
+      </section>
+      <ul>
+        <li><a href="home.html"></a><img src="image/home.png" alt="" /></li>
+        <li></a>Weather</li>
+        <li><a href="Our Team.html"></a>About Us</li>
+      </ul>
     </header>
-     <div>
-      <section class="kiri">
+    <div>
+      <section id="kiri" class="kiri">
         <div>
           <img src="image/clouds.png" alt="awan" class="awan right" />
           <img src="image/clouds.png" alt="awan" class="awan center" />
           <img src="image/clouds.png" alt="awan" class="awan left" />
-          <img src="image/sun.png" alt="" class="sun" />
+          <img id="img_condition" src="image/sun.png" width="250" height="250" alt="condition" class="sun" />
           <ul class="top">
-            <li class="top-1">Jakarta</li>
-            <li class="bot-2">Indonesia</li>
+            <li id="city" class="top-1">Jakarta</li>
+            <li id="country" class="bot-2">Indonesia</li>
           </ul>
         </div>
         <div class="kiri_bawah">
-          <li class="bawah-1">Monday, <span>16.00</span></li>
-          <li class="bawah-2">05 Jun 2023</li>
-          <li class="bawah-3">12°C</li>
-          <li class="bawah-4">Sunny</li>
+          <li id="day" class="bawah-1">Monday, <span>16.00</span></li>
+          <li id="date" class="bawah-2">05 Jun 2023</li>
+          <li id="temp" class="bawah-3">12°C</li>
+          <li id="condition" class="bawah-4">Sunny</li>
         </div>
       </section>
       <section class="tengah">
-        <div class="search-box">
-          <input type="text" class="search-input" placeholder=" Search Area" />
-          <a href="#" class="search-btn">
+        <form id="form" class="search-box">
+          <input id="input" type="text" class="search-input" placeholder=" Search Area" />
+          <button class="search-btn">
             <img src="image/search.png" alt="" />
-          </a>
-        </div>
+          </button>
+        </form>
         <ul class="box">
           <li>
             <div class="cuaca-atas"><img src="image/sunny.png" alt="" width="30%">UV Index</div>
-            <div class="cuaca-bawah">4</div>
+            <div id="uvIndex" class="cuaca-bawah">4</div>
           </li>
           <li>
             <div class="cuaca-atas"><img src="image/slice.png" alt="" width="30%" />Wind</div>
-            <div class="cuaca-bawah1">0.2km/h</div>
+            <div id="wind" class="cuaca-bawah1">0.2km/h</div>
           </li>
           <li>
             <div class="cuaca-atas"><img src="image/wet.png" alt="" width="30%"/>Humidity</div>
-            <div class="cuaca-bawah2">12%</div>
+            <div id="humidity" class="cuaca-bawah2">12%</div>
           </li>
           <li>
-            <div class="cuaca-atas">Sunrise & Sunset</div>
+            <div class="cuaca-atas"><img src="image/pressure.png" alt="" width="30%">Pressure</div>
             <div class="sunrise-sunset">
-              <div class="sunrise"><img src="image/sunrise.png" alt="">05:58</div>
-              <div class="sunset"><img src="image/sunset.png" alt="">17:52</div>
+              <div id="pressure" class="sunrise">23</div>
             </div>
           </li>
           <li>
             <div class="cuaca-atas"><img src="image/air.png" alt="" width="30%"/>Air Quality</div>
-            <div class="cuaca-bawah3">Healthy</div>
+            <div id="airQuality" class="cuaca-bawah3">Healthy</div>
           </li>
           <li>
            <div class="cuaca-atas"><img src="image/dust.png" alt="" width="30%" />Visibility</div>
-           <div class="cuaca-bawah4">3 Km</div>
+           <div id="visibility" class="cuaca-bawah4">3 Km</div>
           </li>
         </ul>
       </section>
       <section class="kanan">
-        <ul class="box2">
+        <ul id="forecast" class="box2">
           <h1>7-Day Forecast</h1>
           <div class="today">
             <li>Today</li>
@@ -113,16 +112,16 @@
             <li><img src="image/raincloud.png" width="50px" /></li>
             <li>12°C</li>
           </div>
-          
         </ul>
       </section>
     </div>
+    <footer>
+      <ul>
+        <li>
+          © Copyright 2023 by Team 12 - Nusantara for RevoU Kampus Merdeka Program 2023
+        </li>
+      </ul>
+    </footer>
+    <script src="script.js"></script>
   </body>
-  <footer>
-    <ul>
-      <li>
-        © Copyright 2023 by Team 12 - Nusantara for RevoU Kampus Merdeka Program 2023
-      </li>
-    </ul>
-  </footer>
 </html>
