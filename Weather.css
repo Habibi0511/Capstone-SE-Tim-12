@@ -54,6 +54,10 @@ header ul {
   justify-content: space-evenly;
 }
 
+header a {
+  color: white;
+}
+
 div {
   display: flex;
   flex-direction: row;
