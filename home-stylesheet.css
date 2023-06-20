@@ -56,7 +56,7 @@ a {
 
 /*Body styling*/
 .container{
-    background-image: url(cloudy-sky-background.png);
+    background-image: url(image/cloudy-sky-background.png);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
