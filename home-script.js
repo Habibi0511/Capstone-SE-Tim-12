@@ -20,8 +20,8 @@ searchInput.addEventListener('input', () => {
     const searchValue = searchInput.value.trim();
     if (searchValue !== '') {
         getSearchSuggestions(searchValue);
-} else {
-    suggestionsList.innerHTML = '';
+    } else {
+        suggestionsList.innerHTML = '';
     }
 });
 
@@ -162,6 +162,36 @@ function getDefaultWeatherData() {
     getForecastData(defaultLocation);
 }
 
+// Mendapatkan data cuaca berdasarkan lokasi pengguna
+function getWeatherDataByLocation() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const apiKey = 'a6497913cf13aa1c8c56af116b4ef52f';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const location = data.name + ', ' + data.sys.country;
+                    locationWeatherBox.textContent = location;
+
+                    weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+                    weatherDescription.textContent = capitalizeFirstLetter(data.weather[0].description);
+
+                    temperature.textContent = data.main.temp + '°C';
+                    windContent.textContent = data?.wind?.speed + ' km/h' || 'N/A';
+                    humidityContent.textContent = data?.main?.humidity + '%' || 'N/A';
+                    lastUpdate.textContent = 'Last Update: ' + getCurrentTime(false);
+                })
+                .catch(error => {
+                    console.log('Terjadi kesalahan:', error);
+                });
+        });
+    }
+}
+
 // Mengambil data cuaca saat search box ditekan
 const searchBox = document.querySelector('.search-input');
 const searchButton = document.querySelector('.search-btn');
@@ -173,8 +203,6 @@ searchButton.addEventListener('click', () => {
         getForecastData(location);
     }
 });
-
-
 
 // Mendapatkan data cuaca saat search box ditekan tombol Enter
 searchBox.addEventListener('keydown', (event) => {
@@ -190,4 +218,5 @@ searchBox.addEventListener('keydown', (event) => {
 // Memanggil fungsi getDefaultWeatherData saat halaman dimuat
 window.addEventListener('load', () => {
     getDefaultWeatherData();
+    getWeatherDataByLocation();
 });
