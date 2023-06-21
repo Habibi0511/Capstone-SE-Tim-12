@@ -36,7 +36,7 @@ function getWeatherData(location) {
             // Mengupdate data cuaca saat ini
             locationWeatherBox.textContent = data.name + ', ' + data.sys.country;
 
-            weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+            weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
             weatherDescription.textContent = capitalizeFirstLetter(data.weather[0].description);
 
             // Mengupdate temperature, kecepatan angin, dan kelembapan
@@ -119,7 +119,7 @@ function getForecastData(location) {
 
                 const date = new Date(forecastData.dt * 1000);
                 day.textContent = date.toLocaleDateString('en-US', { weekday: 'long' });
-                weatherIcon.innerHTML = `<img src="http://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png" alt="Cuaca ${i + 1}">`;
+                weatherIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${forecastData.weather[0].icon}.png" alt="Cuaca ${i + 1}">`;
                 temperature.textContent = forecastData.main.temp + '°C';
                 weatherDescription.textContent = capitalizeFirstLetter(forecastData.weather[0].description);
 
@@ -177,7 +177,7 @@ function getWeatherDataByLocation() {
                     const location = data.name + ', ' + data.sys.country;
                     locationWeatherBox.textContent = location;
 
-                    weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+                    weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
                     weatherDescription.textContent = capitalizeFirstLetter(data.weather[0].description);
 
                     temperature.textContent = data.main.temp + '°C';
